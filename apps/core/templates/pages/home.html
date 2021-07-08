@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Github statistics
+{% endblock title %}
+
+{% block content %}
+
+<h2>Visualize your GitHub statistics</h2>
+
+{% for repo in all_git_repos %}
+   
+
+    <div class="media mt-3 border rounded shadow-sm">
+
+       
+        <div class="media-body ml-3 mt-1 mb-1 position-relative">
+            <h5>{{ repo.user_name }}<span class="badge badge-primary ml-2"></span></h5>
+        </div>
+        <div class="media-body ml-3 mt-1 mb-1 position-relative">
+            <h5><span class="badge badge-primary ml-2">{{ repo.git_profile }}</span></h5>
+        </div>
+        <div class="media-body ml-3 mt-1 mb-1 position-relative">
+        <p>{{ repo.git_profile_description }}</p>
+        </div>
+
+         <div class="media-body ml-3 mt-1 mb-1 position-relative"><h5><a href="/list/dash/{{ repo.id }}/" class="stretched-link">{{ git_repo.git_dashboard }} Github repo statistics</a></h5>
+         </div>
+
+
+        <div>
+            on {{ repo.created|date:"F jS Y" }} by
+            <a class="btn btn-link" href="/account/users/{{ repo.creator_user.username }}/" >
+                {{ repo.creator_user }}
+                <img src="{{ repo.creator_user.gravatar }}" class="navbar-avatar" />
+            </a>
+
+        </div>
+    </div>
+{% endfor %}
+
+
+{% endblock content %}
+
+
+

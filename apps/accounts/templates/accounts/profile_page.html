@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    @{{ user.username }}
+{% endblock title %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3">
+        <img src="{{ user.gravatar }}" />
+
+        <h3>@{{ user.username }}</h3>
+        <p><strong>{{ user.first_name }} {{ user.last_name }}</strong></p>
+        <p>{{ user.bio }}</p>
+
+        {% if is_viewing_self %}
+            <a href="{% url 'edit_profile' %}">Edit</a>
+        {% endif %}
+    </div>
+
+    <div class="col-md-9">
+
+        {% for repo in user_git_repos %}
+         
+            <div class="media mt-3 border rounded shadow-sm">
+                
+                <div class="media-body ml-3 mt-1 mb-1 position-relative">
+                    <h5>{{ repo.user_name }} <span class="badge badge-primary ml-2">{{ repo.git_profile }}</span></h5>
+
+                </div>
+                <p>created</p>
+               
+                <p>&nbsp{{ repo.created|date:"F jS Y" }}</p>
+            </div>
+        {% endfor %}
+
+
+    </div>
+</div>
+{% endblock %}
+
